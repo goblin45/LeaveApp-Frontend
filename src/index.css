@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.m1-auto {
+  justify-content: end;
+}
+.box{
+ display:inline-block;
+ justify-content:center;
+ font-family: 'Times New Roman', Times, serif;
+ border:1px solid black;
+ width:500px;
+ height:fit-content;
+ padding:10px;
+  
+}
+.admin_mails{
+  margin-bottom: 10px;
+  text-align:left;
+  font-family: 'Times New Roman', Times, serif;
+  
+}
+.days{
+  font-size:20px;
+}
+.mails{
+  display:flexbox;
+  overflow-wrap: break-word;
+  
+}
+.confirm{
+  margin-top: 10px;
+}
+.confirm_box
+{
+  
+  position:relative;
+  top:100px;
+}
+.no_mail{
+  padding:10px;
+}
+
+
+.grant{
+  margin-right:10px;
+  margin-bottom: 5px;
+}
+.deny{
+  margin-left:10px;
+  margin-bottom:5px;
+}
+
+.past{
+  width:100%;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+.pending{
+  font-family: 'Times New Roman', Times, serif;
+}
+.head{
+  display:flex;
+  justify-content: space-between;
+  padding:10px;
+}
+.welcome{
+  padding:10px 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+.compose{
+ font-family: 'Times New Roman', Times, serif;
+  margin-left: 10px;
+}
+.primary{
+  margin-top: 10px;
+}
+.send{
+  margin-right: 10px;
+  margin-top:10px;
+}
+.cancel{
+  margin-left:10px;
+  margin-top:10px;
+}
+.admin_box{
+  width:500px;
+}
+.sender_days{
+  display:flex;
+  flex-direction:row; 
+  padding:10px 10px;
+  height:60px;
+  
+}
+.send_to{
+  width:60px;
+  margin-right: 10px;
+  text-align:end;
+}
+.days{
+  width:60px;
+  margin-right: 10px;
+}
+.form_compose{
+  width:100%;
+}
