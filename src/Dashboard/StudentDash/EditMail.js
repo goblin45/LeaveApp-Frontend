@@ -23,17 +23,6 @@ const EditMail = () => {
     const { senderId, senderName, mail_id } = location.state || {}
 
     useEffect(() => {
-		axios.post("http://localhost:3500/students/sameschooladmins", { _id: senderId })
-		.then(response => {
-			const admins_received = response.data
-			setAdmins(admins_received)
-		})
-		.catch(error => {
-			console.log(error)
-		})
-	}, [senderId])
-
-    useEffect(() => {
         axios.post('http://localhost:3500/mails/find', { _id: mail_id })
             .then(response => {
                 const mail = response.data
@@ -48,8 +37,27 @@ const EditMail = () => {
             })
     }, [])
 
+    useEffect(() => {
+		axios.post("http://localhost:3500/students/sameschooladmins", { _id: senderId })
+		.then(response => {
+			const admins_received = response.data
+			setAdmins(admins_received)
+            if (admins?.length === 1) {
+                setReceiverId(admins[0]._id)
+            }
+		})
+		.catch(error => {
+			console.log(error)
+		})
+	})
+
     const handleUpdate = (e) => {
         e.preventDefault()
+
+        if (!receiverId?.length) {
+            console.log(receiverId)
+            return setErr('Can\'t send application as no receiver can be found.')
+        }
 
         axios.patch('http://localhost:3500/mails', { _id: mail_id, subject, days, body, receiverId })
 
@@ -73,7 +81,9 @@ const EditMail = () => {
                 student_id={senderId}
                 admin_id=''
             />
-        <FormContainer>
+       <div className="justify-content-center">
+	
+    <div className='container'>
             <h2>Edit your mail</h2>
             <hr className='mb-3'/>
             <Form>
@@ -98,7 +108,7 @@ const EditMail = () => {
                 
 
                 <Form.Group controlId='body'> </Form.Group>
-                <Form.Label><h4>Mail Body</h4></Form.Label>
+                <Form.Label><h4>Application Body</h4></Form.Label>
 
                 <FloatingLabel controlId="Mail Body" label="Application Body">
                     <Form.Control
@@ -112,12 +122,12 @@ const EditMail = () => {
 
                 <Form.Label><h6 className='send_to'>Receiver</h6></Form.Label>
                     <Form.Select value={receiverId} onChange={handleSelectAdmin}>
-                        {admins ? (
+                        {admins?.length ? (
                             admins.map(admin=>(
         
                                 <option className='admin_box' key={admin._id} value={admin._id} > {admin.name} </option>
                             ))
-                            ) : <option disabled selected>No admin found for this school</option>
+                            ) : <option disabled selected value=''>No admin found for this school</option>
                         }
                     </Form.Select>
 
@@ -125,10 +135,13 @@ const EditMail = () => {
 
                 { err ? <p>{err}</p> : <></> }
 
-                <Button className='primary' onClick={handleUpdate}>Update Mail</Button>
+                {admins?.length ? (
+                    <Button className='primary' onClick={handleUpdate}>Update Mail</Button>
+                ) : <Button variant='secondary' dislabled>Update Mail</Button>}
             
-        </FormContainer>
-        
+
+        </div>
+        </div>
         </div>
     )
 }
