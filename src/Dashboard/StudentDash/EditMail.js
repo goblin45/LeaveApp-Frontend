@@ -100,7 +100,7 @@ const EditMail = () => {
                 <Form.Group controlId='body'> </Form.Group>
                 <Form.Label><h4>Mail Body</h4></Form.Label>
 
-                <FloatingLabel controlId="Mail Body" label="MailBody">
+                <FloatingLabel controlId="Mail Body" label="Application Body">
                     <Form.Control
                         as="textarea" 
                         value={body} 
