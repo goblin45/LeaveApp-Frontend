@@ -71,7 +71,7 @@ const EditSchool = () => {
                     <Form.Label><h5>Contact No</h5></Form.Label>        
                     
                     <Form.Control
-                    type='text' placeholder='' name='contact' onChange={e=>setContact(e.target.value)} value={contact}>
+                    type='text' placeholder='Contact No. of the Institute' name='contact' value={contact} onChange={e=>setContact(e.target.value)}>
                     </Form.Control>
 
                     <Form.Group controlId='code'></Form.Group>
