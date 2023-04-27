@@ -15,7 +15,6 @@ const ReceivedMail = ({ adminId }) => {
             .then(response => {
                 const received_mails = response.data
                 setMails(received_mails)
-                console.log(received_mails)
             })
             .catch(error=>{
                 console.log(error)
@@ -32,9 +31,6 @@ const ReceivedMail = ({ adminId }) => {
                 console.log(_id, status)
                 let data = response.data
                 console.log(data.message)
-
-                let received = [mails]
-                setMails(received)
                 setReload(!reload)
             })
             .catch(error => {
@@ -43,11 +39,8 @@ const ReceivedMail = ({ adminId }) => {
     }  
 
     const onRejectClicked = (mail_id) => {
-        let received = [mails]
         const status = 'Denied'
         let _id = mail_id
-        
-        setMails(received)
 
         axios.patch("http://localhost:3500/mails/admins", { _id, status })
             .then(response => { 
@@ -84,7 +77,7 @@ const ReceivedMail = ({ adminId }) => {
                     </tbody>
                 </Table>
                 <div key={mail._id} className='row'>
-                <p>{mail.body}</p>
+                <p className='text_area'>{mail.body}</p>
                         <div className='buttons'>
                             <Button className='grant' variant='success' onClick={()=>onAcceptClicked(mail._id)}>Grant</Button>
                             <Button className='deny' variant='danger' onClick={()=>onRejectClicked(mail._id)}>Deny</Button>
@@ -96,34 +89,6 @@ const ReceivedMail = ({ adminId }) => {
             ))
 
         ):<p> No mails Found </p>}
-    
-       
-        
-        {/* <Table striped bordered hover>
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Days</th>
-                    <th>Sender</th>            
-                </tr>
-            </thead>
-            
-            {
-                mails?.length ?(
-                    mails.map(mail=>(
-                        <tbody>
-                            <tr key={mail._id}>
-                                <td>{mail.subject}</td>
-                                <td>{mail.days}</td>
-                                <td>{mail.sender}</td>
-                            </tr>
-                        </tbody>
-                    )
-                )):<p>No pending mails for now.</p>
-            }
-        </Table> */}
-
-       
         </div>
      
 
@@ -132,4 +97,4 @@ const ReceivedMail = ({ adminId }) => {
     
 }
 
-export default ReceivedMail
+export default ReceivedMail
