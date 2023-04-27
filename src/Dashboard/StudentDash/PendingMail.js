@@ -48,15 +48,15 @@ const PendingMail = ({ senderId, senderName }) => {
         }
 
         return (
-            <Button onClick={() => handleDelete()}><FontAwesomeIcon icon={ faTrash }/></Button>
+            <Button variant='secondary' onClick={() => handleDelete()}><FontAwesomeIcon icon={ faTrash }/></Button>
         )
     }
 
     return (
         <div className='container'>
             <h4>Your Pending Applications</h4>
-            
-            <Table striped bordered hover>
+            <div className='table-container'>
+            <Table striped bordered hover >
                 
                 {mails?.length ? (
                     <thead>
@@ -70,21 +70,22 @@ const PendingMail = ({ senderId, senderName }) => {
                     </thead>
                 ) : <></>}
                         
-                {mails?.length ? (
+                {mails?.length ?(
                     mails.map(mail=>(
                         <tbody>
                                 <tr key={mail._id}>
                                     <td>{mail.subject}</td>
                                     <td>{mail.status}</td>
                                     <td>{mail.receiverName}</td>
-                                    <td><Button onClick={() => {navigate('/student/editmail', { state: { senderId: senderId, senderName: senderName, mail_id: mail._id } }) }}><FontAwesomeIcon icon={faPenToSquare}/></Button></td>
-                                    <td><DeleteMailButton mail_id={mail._id}/></td>
+                                    <td ><Button variant='secondary' onClick={() => {navigate('/student/editmail', { state: { senderId: senderId, senderName: senderName, mail_id: mail._id } }) }}><FontAwesomeIcon icon={faPenToSquare}/></Button></td>
+                                    <td ><DeleteMailButton  mail_id={mail._id}/></td>
                                                                             
                                 </tr>
                         </tbody>
                         ))
-                ) : <p>No pending mails found</p>}
+                ) : <h5  className='no_mail'>No pending mails found</h5>}
             </Table>
+            </div>
 
             
                 
