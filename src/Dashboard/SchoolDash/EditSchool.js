@@ -1,11 +1,11 @@
 import axios from 'axios'
-import NavBar from '../../NavBar/NavBar'
 import { FormContainer } from '../../Forms/FormContainer'
 import { Form } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import NavBarDashBoard from '../../NavBar/NavBarDashboard'
 
 const EditSchool = () => {
 
@@ -22,7 +22,7 @@ const EditSchool = () => {
     const { admin_id } = location.state || {}
 
     useEffect(() => {
-        axios.post('http://localhost:3500/admins/find', { _id: admin_id })
+        axios.post('https://leaveapp-api.onrender.com/admins/find', { _id: admin_id })
             .then(response => {
                 const data = response.data
                 setAdmin_name(data.name)
@@ -38,7 +38,7 @@ const EditSchool = () => {
  
     const handleEdit = () => {
 
-        axios.patch('http://localhost:3500/schools', { _id: instId, name, contact, code })
+        axios.patch('https://leaveapp-api.onrender.com/schools', { _id: instId, name, contact, code })
             .then(response => {
                 const reply = response.data.message
                 console.log(reply)
@@ -52,7 +52,10 @@ const EditSchool = () => {
 
     return (
         <div>
-        <NavBar/>
+        <NavBarDashBoard
+            student_id=''
+            admin_id={admin_name}
+        />
         <div className='justify-content-center'>
 
             <FormContainer>
