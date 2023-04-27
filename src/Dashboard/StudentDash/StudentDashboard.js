@@ -33,7 +33,7 @@ const StudentDashboard = () => {
 			
 				<h3 className='welcome'>Welcome {student_name}</h3>
 
-				<Button variant='success' className='compose' onClick={ () => {navigate('/student/compose', { state: { studentId: student_id, studentName: student_name } }) }}>Compose New</Button>
+				<Button variant='success' className='compose' onClick={ () => {navigate('/student/compose', { state: { studentId: student_id, studentName: student_name } }) }}><h5>Compose New</h5></Button>
 			
 			</div>
 			<div className='container'>
@@ -45,6 +45,7 @@ const StudentDashboard = () => {
 							senderName = {student_name}
 						/>
 					</div>
+          <hr/>
 					<div className='past'>
 						<PastMail 
 							senderId = {student_id}
