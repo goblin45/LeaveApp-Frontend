@@ -28,7 +28,7 @@ const EditSchool = () => {
                 setAdmin_name(data.name)
                 setInstId(data.inst_id)
                 setName(data.inst_name)
-                setContact(data.setContact)
+                setContact(data.contact)
                 setCode(data.code)
             })
             .catch(error => {
