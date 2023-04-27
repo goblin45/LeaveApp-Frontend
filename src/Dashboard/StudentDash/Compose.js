@@ -29,23 +29,31 @@ const Compose = () => {
 		.then(response => {
 			const admins_received = response.data
 			setAdmins(admins_received)
+			if (admins?.length === 1) {
+				setReceiverId(admins[0]._id)
+			}
 		})
 		.catch(error => {
 			console.log(error)
 		})
-	}, [studentId])
+	})
 
 	const handleSelectAdmin = (e) => {
 		setReceiverId(e.target.value)
 	}
 
 	const handleSubmit = () => {
+
+		if (!receiverId?.length) {
+            return setErr('Can\'t send application as no receiver can be found.')
+        }
+
 		axios.post("http://localhost:3500/mails", {
 				subject,
 				days,
 				body,
 				senderId: studentId,
-				receiverId: receiverId
+				receiverId:receiverId
 			})
 			.then(response => {
 				const data = response.data
@@ -68,7 +76,7 @@ const Compose = () => {
 			<div className="justify-content-center">
 	
 				<div className='container'>
-					<h2>Compose Your Mail</h2>
+					<h2>Compose Your Application</h2>
 					<hr className='md-6'/>
 					<div className='container'>
 						<Form method="POST" >
@@ -81,12 +89,12 @@ const Compose = () => {
 							<div className="sender_days">
 								<Form.Label><h6 className='send_to'>Send to</h6></Form.Label>
 								<Form.Select value={receiverId} onChange={handleSelectAdmin}>
-										{admins ? (
+										{admins?.length ? (
 										admins.map(admin=>(
 						
 											<option className='admin_box' key={admin._id} value={admin._id} > {admin.name} </option>
 											))
-											) : <option disabled selected>No admin found for this school</option>
+											) : <option disabled selected value=''>No admin found for this school</option>
 										}
 								</Form.Select>
 			
@@ -96,8 +104,8 @@ const Compose = () => {
 								type='digit' name='Days' value={days} onChange={(e)=>setDays(e.target.value)} ></Form.Control>        
 							</div>
 						
-							<Form.Label ><h6>Mail Body</h6></Form.Label>
-							<FloatingLabel controlId="floatingTextarea" label="">
+							<Form.Label ><h6>Application Body</h6></Form.Label>
+							<FloatingLabel controlId="floatingTextarea" label="Application Body">
 				
 								<Form.Control
 									as="textarea"
