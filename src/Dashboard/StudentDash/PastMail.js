@@ -38,14 +38,14 @@ const PastMail = ({ senderId }) => {
         }
 
         return (
-            <Button onClick={() => handleDelete()}><FontAwesomeIcon icon={ faTrash }/></Button>
+            <Button variant='secondary' onClick={() => handleDelete()}><FontAwesomeIcon icon={ faTrash }/></Button>
         )
     }
 
     return (
         <div className='conatiner'>
-        <h4>Your Past Applications</h4>
-        
+        <h4>Your Past Mails</h4>
+         <div className='table-container'>
         <Table striped bordered hover >
             {mails?.length ? (
                 <thead>
@@ -71,14 +71,15 @@ const PastMail = ({ senderId }) => {
 
                     </tbody>
             )) 
-            ) : <p>No mails to show.</p>}
-            
-        </Table>
-                
+            ): (
+                <h5 className='no_mail'>No mails found.</h5>
+            )}
+            </Table>
+            </div> 
             
         </div>
         
     );
 };
 
-export default PastMail;
+export default PastMail
